@@ -3,15 +3,21 @@ class ListsController < ApplicationController
     @lists = List.all
   end
 
-  def show
-    @lists = List.find(params[:id])
+  def new
+    @list = List.new
   end
-
+  
   def create
     @list = List.new(list_params)
     @list.save
     redirect_to list_path(@list)
   end
+
+  def show
+    @list = List.find(params[:id])
+    @bookmarks = @list.bookmarks
+  end
+
 
   private
 
